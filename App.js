@@ -1,8 +1,15 @@
 import React from 'react';
-import {UserList} from './src/UserList';
+import UserScreen from './src/UserScreen';
+import {NavigationContainer} from '@react-navigation/native';
 
-export default class App extends React.Component {
-  render() {
-    return <UserList />;
-  }
-}
+const App = () => {
+  return (
+    <>
+      <NavigationContainer>
+        <UserScreen />
+      </NavigationContainer>
+    </>
+  );
+};
+
+export default App;
