@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {
-  View,
   Text,
+  View,
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -14,7 +15,7 @@ const Stack = createNativeStackNavigator();
 const UsersStackScreen = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Users" component={UserScreen} />
+      <Stack.Screen name="User List" component={UserScreen} />
       <Stack.Screen
         options={({route}) => ({title: route.params.title})}
         name="UserDetail"
@@ -84,13 +85,53 @@ const UserDetailScreen = ({route, navigation}) => {
       {loading == true ? (
         <ActivityIndicator size="small" color="#0000ff" />
       ) : (
-        <>
-          <Text style={{fontSize: 20, padding: 12}}>
-            ID: {user.id} {'\n'}Name: {user.name} {'\n'}Username:{' '}
-            {user.username} {'\n'}Email: {user.email} {'\n'}Website:{' '}
-            {user.website}
-          </Text>
-        </>
+        <View style={{padding: 12}}>
+          <ScrollView>
+            <Text style={{fontSize: 20}}>
+              ID: {user.id} {'\n'}
+            </Text>
+            <Text style={{fontSize: 20}}>
+              Name: {user.name + ' ' + user.username} {'\n'}
+            </Text>
+            <Text style={{fontSize: 20}}>
+              Email: {user.email} {'\n'}
+            </Text>
+            <Text style={{fontSize: 20}}>
+              Address: {'\n'}
+              {'\tStreet: '}
+              {user.address.street}
+              {'\n'}
+              {'\tSuite: '}
+              {user.address.suite}
+              {'\n'}
+              {'\tCity: '}
+              {user.address.city}
+              {'\n'}
+              {'\tZip Code: '}
+              {user.address.zipcode}
+              {'\n'}
+              {'\tGeo: '}({user.address.geo.lat}, {user.address.geo.lng}){'\n'}
+            </Text>
+            <Text style={{fontSize: 20}}>
+              Phone: {user.phone} {'\n'}
+            </Text>
+            <Text style={{fontSize: 20}}>
+              Website: {user.website} {'\n'}
+            </Text>
+            <Text style={{fontSize: 20}}>
+              Company: {'\n'}
+              {'\tName: '}
+              {user.company.name}
+              {'\n'}
+              {'\tCatchphrase: '}
+              {user.company.catchPhrase}
+              {'\n'}
+              {'\tBS: '}
+              {user.company.bs}
+              {'\n'}
+            </Text>
+          </ScrollView>
+        </View>
       )}
     </>
   );
