@@ -58,7 +58,7 @@ const UserScreen = ({navigation}) => {
         <ActivityIndicator size="small" color="#0000ff" />
       ) : (
         <SafeAreaView>
-          <FlatList data={users} renderItem={renderUserItem}></FlatList>
+          <FlatList data={users} renderItem={renderUserItem} />
         </SafeAreaView>
       )}
     </>
@@ -85,13 +85,13 @@ const UserDetailScreen = ({route, navigation}) => {
       {loading == true ? (
         <ActivityIndicator size="small" color="#0000ff" />
       ) : (
-        <View style={{padding: 12}}>
+        <View style={{flex: 1, padding: 12}}>
           <ScrollView>
             <Text style={{fontSize: 20}}>
               ID: {user.id} {'\n'}
             </Text>
             <Text style={{fontSize: 20}}>
-              Name: {user.name + ' ' + user.username} {'\n'}
+              Full Name: {user.name + ' ' + user.username} {'\n'}
             </Text>
             <Text style={{fontSize: 20}}>
               Email: {user.email} {'\n'}

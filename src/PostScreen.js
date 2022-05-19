@@ -57,7 +57,11 @@ const PostScreen = ({navigation}) => {
         <ActivityIndicator size="small" color="#0000ff" />
       ) : (
         <SafeAreaView>
-          <FlatList data={posts} renderItem={renderPostItem}></FlatList>
+          <FlatList
+            data={posts}
+            renderItem={renderPostItem}
+            initialNumToRender={20}
+          />
         </SafeAreaView>
       )}
     </>
@@ -84,7 +88,7 @@ const PostDetailScreen = ({route, navigation}) => {
       {loading == true ? (
         <ActivityIndicator size="small" color="#0000ff" />
       ) : (
-        <View style={{padding: 12}}>
+        <View style={{flex: 1, padding: 12}}>
           <Text style={{fontSize: 20}}>
             User ID: {post.userId} {'\n'}
           </Text>
