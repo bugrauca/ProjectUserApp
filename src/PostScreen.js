@@ -72,6 +72,7 @@ const PostDetailScreen = ({route, navigation}) => {
   const {userId} = route.params;
 
   const [post, setPost] = useState({});
+  const [comment, setComment] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -82,6 +83,30 @@ const PostDetailScreen = ({route, navigation}) => {
         setLoading(false);
       });
   }, [userId]);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts/' + userId + '/comments')
+      .then(res => res.json())
+      .then(data => {
+        setComment(data);
+        setLoading(false);
+      });
+  }, [userId]);
+
+  const renderCommentItem = ({item}) => {
+    return (
+      <View style={{flex: 1}}>
+        <Text style={{fontSize: 20, fontWeight: 'bold', padding: 6}}>
+          Comment {item.id}:
+        </Text>
+        <Text style={{fontSize: 20, padding: 6}}>
+          Name: {item.name} {'\n'}
+          {'\n'}Email: {item.email} {'\n'}
+          {'\n'}Body: {item.body}
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <>
@@ -98,7 +123,14 @@ const PostDetailScreen = ({route, navigation}) => {
           <Text style={{fontSize: 20}}>
             Title: {post.title} {'\n'}
           </Text>
-          <Text style={{fontSize: 20}}>Body: {post.body}</Text>
+          <Text style={{fontSize: 20}}>
+            Body: {post.body} {'\n'}
+          </Text>
+          <FlatList
+            data={comment}
+            renderItem={renderCommentItem}
+            initialNumToRender={20}
+          />
         </View>
       )}
     </>
